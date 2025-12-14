@@ -1,5 +1,7 @@
 package ru.yandex.practicum;
 
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -10,5 +12,16 @@ import java.util.List;
 public class WordleDictionary {
 
     private List<String> words;
+    private final PrintWriter log;
+
+    public WordleDictionary(PrintWriter log) {
+        this.words = new ArrayList<String>();
+        this.log = log;
+    }
+
+    public void addWord(String word) {
+        String preparedWord = word.toLowerCase().replaceAll("ё", "е");
+        words.add(preparedWord);
+    }
 
 }
