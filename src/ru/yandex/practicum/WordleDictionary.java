@@ -3,6 +3,7 @@ package ru.yandex.practicum;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /*
 этот класс содержит в себе список слов List<String>
@@ -22,6 +23,12 @@ public class WordleDictionary {
     public void addWord(String word) {
         String preparedWord = word.toLowerCase().replaceAll("ё", "е");
         words.add(preparedWord);
+    }
+
+    public String getRandomWord() {
+        Random random = new Random();
+        int index = random.nextInt(0, words.size());
+        return words.get(index);
     }
 
 }

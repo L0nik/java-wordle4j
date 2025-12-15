@@ -18,12 +18,12 @@ import java.nio.charset.StandardCharsets;
 public class Wordle {
 
     public static void main(String[] args) {
-        try {
-            final FileOutputStream outputStream = new FileOutputStream("log.txt");
-            final PrintWriter log = new PrintWriter(outputStream, false, StandardCharsets.UTF_8);
+        try (final PrintWriter log = new PrintWriter(new FileOutputStream("log.txt"), false, StandardCharsets.UTF_8)) {
             final String pathToDictionary = "words_ru.txt";
             final WordleDictionaryLoader loader = new WordleDictionaryLoader(log);
-            WordleDictionary dictionary = loader.loadDictionary(pathToDictionary);
+            final WordleDictionary dictionary = loader.loadDictionary(pathToDictionary);
+            final WordleGame game = new WordleGame(log, dictionary);
+            game.play();
         } catch (FileNotFoundException exception) {
             //todo
         } catch (IOException exception) {
