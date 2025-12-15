@@ -12,12 +12,18 @@ import java.util.Random;
  */
 public class WordleDictionary {
 
-    private List<String> words;
+    private final List<String> words;
     private final PrintWriter log;
+    private final int wordLength;
 
-    public WordleDictionary(PrintWriter log) {
+    public WordleDictionary(PrintWriter log, int wordLength) {
         this.words = new ArrayList<String>();
         this.log = log;
+        this.wordLength = wordLength;
+    }
+
+    public int getWordLength() {
+        return this.wordLength;
     }
 
     public void addWord(String word) {
@@ -29,6 +35,10 @@ public class WordleDictionary {
         Random random = new Random();
         int index = random.nextInt(0, words.size());
         return words.get(index);
+    }
+
+    public List<String> getWords() {
+        return this.words;
     }
 
 }

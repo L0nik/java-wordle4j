@@ -20,7 +20,7 @@ public class Wordle {
     public static void main(String[] args) {
         try (final PrintWriter log = new PrintWriter(new FileOutputStream("log.txt"), false, StandardCharsets.UTF_8)) {
             final String pathToDictionary = "words_ru.txt";
-            final WordleDictionaryLoader loader = new WordleDictionaryLoader(log);
+            final WordleDictionaryLoader loader = new WordleDictionaryLoader(log, 5);
             final WordleDictionary dictionary = loader.loadDictionary(pathToDictionary);
             final WordleGame game = new WordleGame(log, dictionary);
             game.play();

@@ -11,19 +11,21 @@ import java.nio.charset.StandardCharsets;
 public class WordleDictionaryLoader {
 
     private final PrintWriter log;
+    private final int wordLength;
 
-    public WordleDictionaryLoader(PrintWriter log) {
+    public WordleDictionaryLoader(PrintWriter log, int wordLength) {
         this.log = log;
+        this.wordLength = wordLength;
     }
 
     public WordleDictionary loadDictionary(String fileName) throws FileNotFoundException, IOException {
 
-        WordleDictionary dictionary = new WordleDictionary(this.log);
+        WordleDictionary dictionary = new WordleDictionary(this.log, this.wordLength);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName, StandardCharsets.UTF_8))) {
             while (reader.ready()) {
                 String line = reader.readLine();
-                if (line.length() == 5) {
+                if (line.length() == this.wordLength) {
                     dictionary.addWord(line);
                 }
             }
