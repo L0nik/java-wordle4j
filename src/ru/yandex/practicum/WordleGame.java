@@ -33,35 +33,24 @@ public class WordleGame {
         this.absentLetters = new HashSet<>();
         this.presentLetters = new HashSet<>();
         this.knownLetters = new Character[dictionary.getWordLength()];
-    }
-
-    public void play() {
-        final Scanner scanner = new Scanner(System.in);
         this.answer = dictionary.getRandomWord();
         this.steps = 6;
-        while (true) {
-            System.out.printf("Введите слово (осталось %d попыток):\n", steps);
-            String userInput = scanner.nextLine();
-            String word = userInput.toLowerCase().replaceAll("ё", "е");
-            if (word.isBlank()) {
-                word = getHint();
-                System.out.println(word);
-            }
-            if (word.equals(this.answer)) {
-                System.out.println("Это верный ответ, вы выиграли!!!");
-                break;
-            } else {
-                steps--;
-                System.out.println(compareWordToAnswer(word));
-            }
-            if (steps <= 0) {
-                System.out.println("У вас закончились попытки, вы проиграли. Правильный ответ: " + this.answer);
-                break;
-            }
+    }
+
+    public boolean wordIsAnswer(String word) {
+        return this.answer.equals(word);
+    }
+
+    public void validateWord(String word) throws WordNotFoundInDictionary {
+        if (!dictionary.containsWord(word)) {
+            String message = String.format("Слово отсутствует в словаре: %s", word);
+            this.log.println(message);
+            throw new WordNotFoundInDictionary(message);
         }
     }
 
     public String compareWordToAnswer(String word) {
+        this.steps--;
         this.usedWords.add(word);
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
@@ -82,7 +71,6 @@ public class WordleGame {
     }
 
     public String getHint() {
-
         if (this.usedWords.isEmpty()) {
             String hint = this.dictionary.getRandomWord();
             while (hint.equals(this.answer)) {
@@ -127,6 +115,14 @@ public class WordleGame {
 
         }
         return "";
+    }
+
+    public int getSteps() {
+        return this.steps;
+    }
+
+    public String getAnswer() {
+        return this.answer;
     }
 
 }

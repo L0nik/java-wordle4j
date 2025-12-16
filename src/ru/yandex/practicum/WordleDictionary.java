@@ -41,4 +41,12 @@ public class WordleDictionary {
         return this.words;
     }
 
+    public boolean containsWord(String word) {
+        return this.words.contains(word);
+    }
+
+    public boolean isEmpty() {
+        return this.words.isEmpty();
+    }
+
 }

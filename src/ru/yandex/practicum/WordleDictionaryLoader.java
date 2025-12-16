@@ -18,7 +18,7 @@ public class WordleDictionaryLoader {
         this.wordLength = wordLength;
     }
 
-    public WordleDictionary loadDictionary(String fileName) throws FileNotFoundException, IOException {
+    public WordleDictionary loadDictionary(String fileName) {
 
         WordleDictionary dictionary = new WordleDictionary(this.log, this.wordLength);
 
@@ -29,6 +29,8 @@ public class WordleDictionaryLoader {
                     dictionary.addWord(line);
                 }
             }
+        } catch (IOException exception) {
+            exception.printStackTrace(this.log);
         }
         return dictionary;
     }

@@ -2,9 +2,9 @@ package ru.yandex.practicum;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 /*
 в главном классе нам нужно:
@@ -23,11 +23,37 @@ public class Wordle {
             final WordleDictionaryLoader loader = new WordleDictionaryLoader(log, 5);
             final WordleDictionary dictionary = loader.loadDictionary(pathToDictionary);
             final WordleGame game = new WordleGame(log, dictionary);
-            game.play();
+            play(game);
         } catch (FileNotFoundException exception) {
-            //todo
-        } catch (IOException exception) {
-            //todo
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    private static void play(WordleGame game) {
+        final Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.printf("Введите слово (осталось %d попыток):\n", game.getSteps());
+            String userInput = scanner.nextLine();
+            String word = userInput.toLowerCase().replaceAll("ё", "е");
+            if (word.isBlank()) {
+                word = game.getHint();
+                System.out.println(word);
+            }
+            if (game.wordIsAnswer(word)) {
+                System.out.println("Это верный ответ, вы выиграли!!!");
+                break;
+            }
+            try {
+                game.validateWord(word);
+            } catch (WordNotFoundInDictionary exception) {
+                System.out.println(exception.getMessage());
+                continue;
+            }
+            System.out.println(game.compareWordToAnswer(word));
+            if (game.getSteps() <= 0) {
+                System.out.println("У вас закончились попытки, вы проиграли. Правильный ответ: " + game.getAnswer());
+                break;
+            }
         }
     }
 
