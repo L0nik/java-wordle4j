@@ -14,16 +14,10 @@ public class WordleDictionary {
 
     private final List<String> words;
     private final PrintWriter log;
-    private final int wordLength;
 
-    public WordleDictionary(PrintWriter log, int wordLength) {
+    public WordleDictionary(PrintWriter log) {
         this.words = new ArrayList<String>();
         this.log = log;
-        this.wordLength = wordLength;
-    }
-
-    public int getWordLength() {
-        return this.wordLength;
     }
 
     public void addWord(String word) {
@@ -45,8 +39,8 @@ public class WordleDictionary {
         return this.words.contains(word);
     }
 
-    public boolean isEmpty() {
-        return this.words.isEmpty();
+    public int size() {
+        return this.words.size();
     }
 
 }

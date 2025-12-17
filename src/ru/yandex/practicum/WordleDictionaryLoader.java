@@ -20,7 +20,7 @@ public class WordleDictionaryLoader {
 
     public WordleDictionary loadDictionary(String fileName) {
 
-        WordleDictionary dictionary = new WordleDictionary(this.log, this.wordLength);
+        WordleDictionary dictionary = new WordleDictionary(this.log);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName, StandardCharsets.UTF_8))) {
             while (reader.ready()) {

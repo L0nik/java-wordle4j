@@ -29,12 +29,12 @@ public class WordleGame {
     public WordleGame(PrintWriter log, WordleDictionary dictionary) {
         this.log = log;
         this.dictionary = dictionary;
+        this.answer = dictionary.getRandomWord();
+        this.steps = 6;
+        this.knownLetters = new Character[this.answer.length()];
         this.usedWords = new ArrayList<>();
         this.absentLetters = new HashSet<>();
         this.presentLetters = new HashSet<>();
-        this.knownLetters = new Character[dictionary.getWordLength()];
-        this.answer = dictionary.getRandomWord();
-        this.steps = 6;
     }
 
     public boolean wordIsAnswer(String word) {
