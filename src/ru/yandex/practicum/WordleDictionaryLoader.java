@@ -30,6 +30,7 @@ public class WordleDictionaryLoader {
                 }
             }
         } catch (IOException exception) {
+            this.log.println("Произошла ошибка при загрузке словаря:");
             exception.printStackTrace(this.log);
         }
         return dictionary;
