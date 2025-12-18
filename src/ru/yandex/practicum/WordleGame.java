@@ -63,8 +63,7 @@ public class WordleGame {
             if (this.answer.charAt(i) == charWord) {
                 result.append("+");
                 knownLetters[i] = charWord;
-            }
-            else if (this.answer.contains(Character.toString(charWord))) {
+            } else if (this.answer.contains(Character.toString(charWord))) {
                 result.append("^");
                 this.presentLetters.add(charWord);
             } else {
