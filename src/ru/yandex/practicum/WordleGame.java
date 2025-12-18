@@ -37,6 +37,11 @@ public class WordleGame {
         this.presentLetters = new HashSet<>();
     }
 
+    public WordleGame(PrintWriter log, WordleDictionary dictionary, String answer) {
+        this(log, dictionary);
+        this.answer = answer;
+    }
+
     public boolean wordIsAnswer(String word) {
         return this.answer.equals(word);
     }
