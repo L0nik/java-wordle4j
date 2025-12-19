@@ -13,21 +13,20 @@ import java.util.Random;
 public class WordleDictionary {
 
     private final List<String> words;
-    private final PrintWriter log;
+    private final Random random;
 
-    public WordleDictionary(PrintWriter log) {
-        this.words = new ArrayList<String>();
-        this.log = log;
+    public WordleDictionary() {
+        this.words = new ArrayList<>();
+        this.random = new Random();
     }
 
     public void addWord(String word) {
-        String preparedWord = word.toLowerCase().replaceAll("ё", "е");
+        String preparedWord = word.toLowerCase();
         words.add(preparedWord);
     }
 
     public String getRandomWord() {
-        Random random = new Random();
-        int index = random.nextInt(0, words.size());
+        int index = this.random.nextInt(0, words.size());
         return words.get(index);
     }
 

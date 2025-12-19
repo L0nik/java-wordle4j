@@ -1,7 +1,7 @@
 package ru.yandex.practicum;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -24,7 +24,7 @@ public class Wordle {
             final WordleDictionary dictionary = loader.loadDictionary(pathToDictionary);
             final WordleGame game = new WordleGame(log, dictionary);
             play(game);
-        } catch (FileNotFoundException exception) {
+        } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
     }
@@ -34,7 +34,7 @@ public class Wordle {
         while (true) {
             System.out.printf("Введите слово (осталось %d попыток):\n", game.getSteps());
             String userInput = scanner.nextLine();
-            String word = userInput.toLowerCase().replaceAll("ё", "е");
+            String word = userInput.toLowerCase();
             if (word.isBlank()) {
                 word = game.getHint();
                 System.out.println(word);

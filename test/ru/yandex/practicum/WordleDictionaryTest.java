@@ -21,13 +21,13 @@ class WordleDictionaryTest {
 
     @BeforeEach
     public void beforeEach() {
-        dictionary = new WordleDictionary(log);
+        dictionary = new WordleDictionary();
     }
 
     @Test
     public void addWordTest() {
         dictionary.addWord("ЁжИк");
-        assertEquals("ежик", dictionary.getRandomWord());
+        assertEquals("ёжик", dictionary.getRandomWord());
     }
 
     @Test
